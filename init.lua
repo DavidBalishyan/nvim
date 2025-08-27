@@ -150,23 +150,10 @@ rtp:prepend(lazypath)
 --
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
-  -- lua/custom/oli.lua
-  {
-    'stevearc/oil.nvim',
-    dependencies = { { 'echasnovski/mini.icons', opts = {} } },
-    lazy = false,
-    config = function()
-      require('oil').setup {
-        default_file_explorer = true,
-        columns = { 'icon', 'size', 'mtime' },
-      }
-
-      -- Keymap to open parent directory
-      vim.keymap.set('n', '<leader>e', '<Cmd>Oil<CR>', { desc = 'Open parent directory' })
-    end,
-  },
+  require 'custom/plugins/oil',
+  require 'custom/plugins/comment',
+  require 'custom/plugins/autopairs',
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
-
   'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
 
   -- NOTE: Plugins can also be added by using a table,
