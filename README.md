@@ -17,8 +17,9 @@ mv ~/.config/nvim ~/.config/nvim.bak
 
 # Clone this repository
 git clone https://github.com/DavidBalishyan/nvim.git ~/.config/nvim
+
 # Open neovim
 nvim
 ```
-All plugins are managed with lazy.nvim, and they will install automatically on first run.
 
+All plugins are managed with lazy.nvim, and they will install automatically on first run.
