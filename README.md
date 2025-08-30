@@ -78,9 +78,7 @@ The main configuration file is located at `~/.config/nvim/init.lua`. Additional 
 
 ## 🧩 Customization
 
-* **Key Mappings**: Modify key mappings in `lua/custom/keymaps.lua`.
 * **Plugin Configurations**: Adjust plugin settings in `lua/custom/plugins/`.
-* **Themes**: Change the color scheme by editing `lua/custom/colorscheme.lua`.
 
 ---
 
