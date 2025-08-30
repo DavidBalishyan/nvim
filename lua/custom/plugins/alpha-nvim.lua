@@ -1,7 +1,7 @@
 return {
   'goolord/alpha-nvim',
   dependencies = {
-    'nvim-tree/nvim-web-devicons', -- optional
+    'nvim-tree/nvim-web-devicons',
     'MaximilianLloyd/ascii.nvim', -- ASCII art plugin
   },
   config = function()
@@ -12,7 +12,7 @@ return {
     -- Get a random Neovim ASCII art and flatten it
     local art = ascii.get_random('text', 'neovim')
     if type(art[1]) == 'table' then
-      art = art[1] -- pick the first nested table if it’s wrapped
+      art = art[1]
     end
     dashboard.section.header.val = art
 
