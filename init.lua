@@ -1,4 +1,5 @@
 -- NOTE: https://github.com/nvim-lua/kickstart.nvim
+
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = true
@@ -8,10 +9,17 @@ vim.o.relativenumber = true
 vim.o.mouse = 'a'
 vim.o.showmode = false
 
+-- [[[Tabs and spaces]]]
+vim.o.tabstop = 2
+vim.o.shiftwidth = 2
+
+-- [[[Swapfile]]]
+vim.o.swapfile = false
+
 vim.schedule(function()
   vim.o.clipboard = 'unnamedplus'
 end)
-
+vim.o.wrap = false
 vim.o.breakindent = true
 vim.o.undofile = true
 vim.o.ignorecase = true
@@ -58,6 +66,23 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   end
 end
 
+-- ReloadConfig
+function _G.ReloadConfig()
+  local plenary_loaded, _ = pcall(require, 'plenary.reload')
+  if not plenary_loaded then
+    vim.notify('plenary.nvim is required for hot reload', vim.log.levels.ERROR)
+    return
+  end
+
+  local reload = require('plenary.reload').reload_module
+  -- Change 'custom' to match your config namespace (e.g., 'custom', 'plugins', etc.)
+  reload('custom', true)
+
+  dofile(vim.env.MYVIMRC)
+  vim.notify('Configuration reloaded!', vim.log.levels.INFO)
+end
+
+vim.api.nvim_create_user_command('ReloadConfig', ReloadConfig, {})
 ---@type vim.Option
 local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
