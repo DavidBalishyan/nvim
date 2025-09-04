@@ -1,95 +1,13 @@
 -- NOTE: https://github.com/nvim-lua/kickstart.nvim
 
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-vim.g.have_nerd_font = true
--- [[ Setting options ]]
-vim.o.number = true
-vim.o.relativenumber = true
-vim.o.mouse = 'a'
-vim.o.showmode = false
-
--- [[[Tabs and spaces]]]
-vim.o.tabstop = 2
-vim.o.shiftwidth = 2
-
--- [[[Swapfile]]]
-vim.o.swapfile = false
-
-vim.schedule(function()
-  vim.o.clipboard = 'unnamedplus'
-end)
-vim.o.wrap = false
-vim.o.breakindent = true
-vim.o.undofile = true
-vim.o.ignorecase = true
-vim.o.smartcase = true
-vim.o.signcolumn = 'yes'
-vim.o.updatetime = 250
-vim.o.timeoutlen = 300
-vim.o.splitright = true
-vim.o.splitbelow = true
-vim.o.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
-vim.o.inccommand = 'split'
-vim.o.cursorline = true
-vim.o.scrolloff = 10
-vim.o.confirm = true
-
--- [[ Basic Keymaps ]]
-vim.keymap.set('n', '<leader>w', ':w<CR>', { noremap = true, desc = 'Save the current file' })
-vim.keymap.set('n', '<leader>q', ':q<CR>', { noremap = true, desc = 'quit' })
-vim.keymap.set('n', '<leader>1', ':wq<CR>', { noremap = true, desc = 'write & quit' })
-vim.keymap.set('n', '<leader>Q', ':q!<CR>', { noremap = true, desc = 'quit!' })
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
-
-vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-  callback = function()
-    vim.hl.on_yank()
-  end,
-})
-
--- [[ Install `lazy.nvim` plugin manager ]]
-local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
-  local out = vim.fn.system { 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazypath }
-  if vim.v.shell_error ~= 0 then
-    error('Error cloning lazy.nvim:\n' .. out)
-  end
-end
-
--- ReloadConfig
-function _G.ReloadConfig()
-  local plenary_loaded, _ = pcall(require, 'plenary.reload')
-  if not plenary_loaded then
-    vim.notify('plenary.nvim is required for hot reload', vim.log.levels.ERROR)
-    return
-  end
-
-  local reload = require('plenary.reload').reload_module
-  -- Change 'custom' to match your config namespace (e.g., 'custom', 'plugins', etc.)
-  reload('custom', true)
-
-  dofile(vim.env.MYVIMRC)
-  vim.notify('Configuration reloaded!', vim.log.levels.INFO)
-end
-
-vim.api.nvim_create_user_command('ReloadConfig', ReloadConfig, {})
----@type vim.Option
-local rtp = vim.opt.rtp
-rtp:prepend(lazypath)
+require 'custom.core.settings'
+-- [[ lazy.nvim ]]
+require 'custom.core.lazy'
 
 -- [[ Configure and install plugins ]]
 require('lazy').setup({
   require 'custom.plugins',
+  require 'custom.themes',
   'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
 
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
@@ -624,9 +542,8 @@ require('lazy').setup({
       }
 
       -- Load the colorscheme here.
-      -- Like many other themes, this one has different styles, and you could load
-      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
       vim.cmd.colorscheme 'tokyonight-night'
+      -- vim.cmd.colorscheme 'gruvbox'
     end,
   },
 
@@ -705,26 +622,9 @@ require('lazy').setup({
   --  Here are some example plugins that I've included in the Kickstart repository.
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
-  require 'kickstart.plugins.debug',
-  -- require 'kickstart.plugins.indent_line',
-  -- require 'kickstart.plugins.lint',
-  -- require 'kickstart.plugins.neo-tree',
-  require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
-  --
-  -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
-  --    This is the easiest way to modularize your config.
-  --
-  --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  -- { import = 'custom.plugins' },
-  --
-  -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
-  -- Or use telescope!
-  -- In normal mode type `<space>sh` then write `lazy.nvim-plugin`
-  -- you can continue same window with `<space>sr` which resumes last telescope search
+  require 'kickstart.plugins',
 }, {
   ui = {
-    -- If you are using a Nerd Font: set icons to an empty table which will use the
-    -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
     icons = vim.g.have_nerd_font and {} or {
       cmd = '⌘',
       config = '🛠',

@@ -4,4 +4,5 @@ return {
   require 'custom.plugins.autopairs',
   require 'custom.plugins.alpha-nvim',
   require 'custom.plugins.noice',
+  require 'custom.plugins.lualine',
 }

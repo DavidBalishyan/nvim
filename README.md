@@ -61,19 +61,19 @@ The main configuration file is located at `~/.config/nvim/init.lua`. Additional 
 
 ## 🧩 Key Plugins
 
-| Plugin                                                             | Purpose                          |
-| ------------------------------------------------------------------ | -------------------------------- |
-| [lazy.nvim](https://github.com/folke/lazy.nvim)                    | Fast plugin manager              |
-| [noice.nvim](https://github.com/folke/noice.nvim)                  | Enhanced notifications           |
-| [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)         | LSP configurations               |
-| [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)                    | Autocompletion engine            |
-| [LuaSnip](https://github.com/L3MON4D3/LuaSnip)                     | Snippet engine                   |
-| [Telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) | Fuzzy finder and file navigation |
-| [oil.nvim](https://github.com/stevearc/oil.nvim)                   | File explorer                    |
-| [Comment.nvim](https://github.com/numToStr/Comment.nvim)           | Easy commenting                  |
-| [nvim-autopairs](https://github.com/windwp/nvim-autopairs)         | Autopairing brackets and quotes  |
-| [nvim-surround](https://github.com/kylechui/nvim-surround)         | Surround text objects            |
-
+| Plugin                                                             | Purpose                              |
+| ------------------------------------------------------------------ | --------------------------------     |
+| [lazy.nvim](https://github.com/folke/lazy.nvim)                    | Fast plugin manager                  |
+| [noice.nvim](https://github.com/folke/noice.nvim)                  | Enhanced notifications               |
+| [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)         | LSP configurations                   |
+| [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)                    | Autocompletion engine                |
+| [LuaSnip](https://github.com/L3MON4D3/LuaSnip)                     | Snippet engine                       |
+| [Telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) | Fuzzy finder and file navigation     |
+| [oil.nvim](https://github.com/stevearc/oil.nvim)                   | File explorer                        |
+| [Comment.nvim](https://github.com/numToStr/Comment.nvim)           | Easy commenting                      |
+| [nvim-autopairs](https://github.com/windwp/nvim-autopairs)         | Autopairing brackets and quotes      |
+| [nvim-surround](https://github.com/kylechui/nvim-surround)         | Surround text objects                |
+| [lualine](https://github.com/dimitry-ishenko-neovim/lualine-nvim)  | Add a beautifull looking command bar |
 ---
 
 ## 🧩 Customization
@@ -85,4 +85,3 @@ The main configuration file is located at `~/.config/nvim/init.lua`. Additional 
 ## 📄 License
 
 This configuration is open-source and available under the [MIT License](LICENSE).
-
